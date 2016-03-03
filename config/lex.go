@@ -48,34 +48,35 @@ const (
 	itemLeftBracket      // '['
 	itemRightBracket     // ']'
 	itemNewline          // newline, for the most part, indicates end of command.
-	itemBackslash        // backslash at the end of a line makes the command continue to the next line.
 	itemSemicolon
 	itemComma
 	itemString   // quoted string (includes quotes)
 	itemText     // plain text
-	itemVariable // variable starting with '$', such as '$1' or '$hello'
 	itemHexColor // hex color code
 	itemCriteria
 	// Keywords appear after all the rest.
 	itemKeyword // used only to delimit the keywords
+	// config options
 	itemFont
-	itemYes
-	itemNo
 	itemBindsym
 	itemBindcode
 	itemFloatingModifier
+	itemFloatingMinimumSize
+	itemFloatingMaximumSize
+	itemDefaultOrientation
+	itemWorkspaceLayout
+	itemNewWindow
+	itemNewFloat
+	itemHideEdgeBorders
+	itemForWindow
+	itemNoFocus
 	itemSet
 	itemAssign
-	itemExec
-	itemWorkspace
-	itemNext
-	itemPrev
-	itemNextOnOutput
-	itemPrevOnOutput
-	itemBackAndForth
-	itemNumber
+	itemFocusFollowsMouse
+	itemMouseWarping
 	itemWorkspaceAutoBackAndForth
 	itemBar
+	// bar subcommand
 	itemStatusCommand
 	itemBarCommand
 	itemModifier
@@ -94,25 +95,47 @@ const (
 	itemWorkspaceButtons
 	itemStripWorkspaceNumbers
 	itemBindingModeIndicator
+	// command
+	itemFullscreen
+	itemFloating
+	itemExec
+	itemKill
+	itemRestart
+	itemReload
+	itemExit
+	itemWorkspace
 	itemMove
+	itemSplit
+	itemSplitv
+	itemSplith
+	itemSplitt
+	itemLayout
+	itemFocus
+	itemSticky
+	itemRename
+	itemResize
+	itemMode
+	itemBorder
+	itemScratchpad
+	// argument
+	itemYes
+	itemNo
+	itemNext
+	itemPrev
+	itemNextOnOutput
+	itemPrevOnOutput
+	itemBackAndForth
+	itemNumber
 	itemContainer
 	itemWindow
 	itemTo
-	itemKill
-	itemSplit
 	itemVertical
 	itemHorizontal
-	itemLayout
 	itemDefault
 	itemTabbed
 	itemStacking
-	itemSplitv
-	itemSplith
 	itemToggle
 	itemAll
-	itemFullscreen
-	itemFloating
-	itemFocus
 	itemLeft
 	itemRight
 	itemDown
@@ -124,42 +147,37 @@ const (
 	itemModeToggle
 	itemMouse
 	itemAbsolute
-	itemSticky
 	itemEnable
 	itemDisable
-	itemRename
-	itemResize
 	itemGrow
 	itemShrink
-	itemMode
 	itemHeight
 	itemWidth
-	itemRestart
-	itemReload
-	itemExit
-	itemScratchpad
 	itemShow
 )
 
 var key = map[string]itemType{
+	// config options
 	"font":                          itemFont,
-	"yes":                           itemYes,
-	"no":                            itemNo,
 	"bindsym":                       itemBindsym,
 	"bindcode":                      itemBindcode,
 	"floating_modifier":             itemFloatingModifier,
+	"floating_minimum_size":         itemFloatingMinimumSize,
+	"floating_maximum_size":         itemFloatingMaximumSize,
+	"default_orientation":           itemDefaultOrientation,
+	"workspace_layout":              itemWorkspaceLayout,
+	"new_window":                    itemNewWindow,
+	"new_float":                     itemNewFloat,
+	"hide_edge_borders":             itemHideEdgeBorders,
+	"for_window":                    itemForWindow,
+	"no_focus":                      itemNoFocus,
 	"set":                           itemSet,
 	"assign":                        itemAssign,
-	"exec":                          itemExec,
-	"workspace":                     itemWorkspace,
-	"next":                          itemNext,
-	"prev":                          itemPrev,
-	"next_on_output":                itemNextOnOutput,
-	"prev_on_output":                itemPrevOnOutput,
-	"back_and_forth":                itemBackAndForth,
-	"number":                        itemNumber,
+	"focus_follows_mouse":           itemFocusFollowsMouse,
+	"mouse_warping":                 itemMouseWarping,
 	"workspace_auto_back_and_forth": itemWorkspaceAutoBackAndForth,
-	"bar":                     itemBar,
+	"bar": itemBar,
+	// bar subcommands
 	"status_command":          itemStatusCommand,
 	"bar_command":             itemBarCommand,
 	"modifier":                itemModifier,
@@ -179,51 +197,64 @@ var key = map[string]itemType{
 	"strip_workspace_numbers": itemStripWorkspaceNumbers,
 	"binding_mode_indicator":  itemBindingModeIndicator,
 	// commands
-	"move":        itemMove,
-	"container":   itemContainer,
-	"window":      itemWindow,
-	"to":          itemTo,
-	"kill":        itemKill,
-	"split":       itemSplit,
-	"vertical":    itemVertical,
-	"horizontal":  itemHorizontal,
-	"layout":      itemLayout,
-	"default":     itemDefault,
-	"tabbed":      itemTabbed,
-	"stacking":    itemStacking,
-	"splitv":      itemSplitv,
-	"splith":      itemSplith,
-	"toggle":      itemToggle,
-	"all":         itemAll,
-	"fullscreen":  itemFullscreen,
-	"floating":    itemFloating,
-	"focus":       itemFocus,
-	"left":        itemLeft,
-	"right":       itemRight,
-	"down":        itemDown,
-	"up":          itemUp,
-	"center":      itemCenter,
-	"parent":      itemParent,
-	"child":       itemChild,
-	"tiling":      itemTiling,
-	"mode_toggle": itemModeToggle,
-	"mouse":       itemMouse,
-	"absolute":    itemAbsolute,
-	"sticky":      itemSticky,
-	"enable":      itemEnable,
-	"disable":     itemDisable,
-	"rename":      itemRename,
-	"resize":      itemResize,
-	"grow":        itemGrow,
-	"shrink":      itemShrink,
-	"mode":        itemMode,
-	"height":      itemHeight,
-	"width":       itemWidth,
-	"restart":     itemRestart,
-	"reload":      itemReload,
-	"exit":        itemExit,
-	"scratchpad":  itemScratchpad,
-	"show":        itemShow,
+	"fullscreen": itemFullscreen,
+	"floating":   itemFloating,
+	"exec":       itemExec,
+	"kill":       itemKill,
+	"restart":    itemRestart,
+	"reload":     itemReload,
+	"exit":       itemExit,
+	"workspace":  itemWorkspace,
+	"move":       itemMove,
+	"split":      itemSplit,
+	"splitv":     itemSplitv,
+	"splith":     itemSplith,
+	"splitt":     itemSplitt,
+	"layout":     itemLayout,
+	"focus":      itemFocus,
+	"sticky":     itemSticky,
+	"rename":     itemRename,
+	"resize":     itemResize,
+	"mode":       itemMode,
+	"border":     itemBorder,
+	"scratchpad": itemScratchpad,
+	// arguments
+	"yes":            itemYes,
+	"no":             itemNo,
+	"next":           itemNext,
+	"prev":           itemPrev,
+	"next_on_output": itemNextOnOutput,
+	"prev_on_output": itemPrevOnOutput,
+	"back_and_forth": itemBackAndForth,
+	"number":         itemNumber,
+	"container":      itemContainer,
+	"window":         itemWindow,
+	"to":             itemTo,
+	"vertical":       itemVertical,
+	"horizontal":     itemHorizontal,
+	"default":        itemDefault,
+	"tabbed":         itemTabbed,
+	"stacking":       itemStacking,
+	"toggle":         itemToggle,
+	"all":            itemAll,
+	"left":           itemLeft,
+	"right":          itemRight,
+	"down":           itemDown,
+	"up":             itemUp,
+	"center":         itemCenter,
+	"parent":         itemParent,
+	"child":          itemChild,
+	"tiling":         itemTiling,
+	"mode_toggle":    itemModeToggle,
+	"mouse":          itemMouse,
+	"absolute":       itemAbsolute,
+	"enable":         itemEnable,
+	"disable":        itemDisable,
+	"grow":           itemGrow,
+	"shrink":         itemShrink,
+	"height":         itemHeight,
+	"width":          itemWidth,
+	"show":           itemShow,
 }
 
 const eof = -1
@@ -355,10 +386,8 @@ func lexConfig(l *lexer) stateFn {
 			l.emit(itemSemicolon)
 		case ',':
 			l.emit(itemComma)
-		case ' ':
+		case ' ', '\t':
 			l.ignore()
-		case '$':
-			return lexVariable
 		case '#':
 			return lexComment
 		case '"':
@@ -371,7 +400,8 @@ func lexConfig(l *lexer) stateFn {
 			l.emit(itemRightCurlBracket)
 		case '\\':
 			if l.peek() == '\n' {
-				l.emit(itemBackslash)
+				l.next()
+				l.ignore()
 			}
 		default:
 			return lexText
@@ -382,7 +412,7 @@ func lexConfig(l *lexer) stateFn {
 func lexText(l *lexer) stateFn {
 	for {
 		switch l.next() {
-		case ' ', '$', '#', '"', '[', ',', ';', '\\', '\n', eof, '{', '}':
+		case ' ', '\t', '$', '#', '"', '[', ',', ';', '\\', '\n', eof, '{', '}':
 			l.backup()
 			keyword := l.input[l.start:l.pos]
 
@@ -402,24 +432,21 @@ func lexComment(l *lexer) stateFn {
 	colorCheck := false
 	for {
 		switch l.next() {
-		case '\n':
-			if !colorCheck && isHexColor(l.input[l.start:l.pos-1]) {
-				l.backup()
+		case '\n', eof:
+			l.backup()
+			if !colorCheck && isHexColor(l.input[l.start:l.pos]) {
 				l.emit(itemHexColor)
 				return lexConfig
 			}
 			l.ignore()
 			return lexConfig
-		case ' ':
+		case ' ', '\t':
 			if !colorCheck && isHexColor(l.input[l.start:l.pos-1]) {
 				l.backup()
 				l.emit(itemHexColor)
 				return lexConfig
 			}
 			colorCheck = true
-		case eof:
-			l.emit(itemEOF)
-			return nil
 		}
 	}
 }
@@ -459,32 +486,16 @@ Loop:
 	return lexConfig
 }
 
-func lexVariable(l *lexer) stateFn {
-	for {
-		switch r := l.next(); {
-		case isAlphaNumericUnderscore(r):
-			// absorb
-		case r == ' ' || r == '\n' || r == eof:
-			l.backup()
-			if l.pos-l.start < 2 {
-				return l.errorf("$ can't stand by itself")
-			}
-			l.emit(itemVariable)
-			return lexConfig
-		default:
-			pattern := l.input[l.start:l.pos]
-			return l.errorf("invalid variable: %s", pattern)
-		}
-	}
-
-}
-
 func isHexColor(color string) bool {
-	if len(color) != 6 && len(color) != 8 {
+	if len(color) != 7 && len(color) != 9 {
 		return false
 	}
 
-	for _, c := range color {
+	if color[0] != '#' {
+		return false
+	}
+
+	for _, c := range color[1:] {
 		if !isHexChar(c) {
 			return false
 		}
