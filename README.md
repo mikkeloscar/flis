@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/mikkeloscar/flise.svg?branch=master)](https://travis-ci.org/mikkeloscar/flise)
 [![GoDoc](https://godoc.org/github.com/mikkeloscar/flise?status.svg)](https://godoc.org/github.com/mikkeloscar/flise)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mikkeloscar/flise)](https://goreportcard.com/report/github.com/mikkeloscar/flise)
+[![Coverage Status](https://coveralls.io/repos/github/mikkeloscar/flise/badge.svg)](https://coveralls.io/github/mikkeloscar/flise)
 
 flise is a Wayland tiling compositor inspired by sway and i3, written in [go][golang].
 
