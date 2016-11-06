@@ -1,21 +1,114 @@
 package config
 
 import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path"
+	"regexp"
 	"sort"
+	"strings"
 
+	"github.com/mikkeloscar/flise/context"
 	"github.com/mikkeloscar/go-wlc"
-	"github.com/mikkeloscar/go-xkbcommon"
+	"github.com/prometheus/common/log"
 )
 
+// Config defines the configuration of a compositor.
 type Config struct {
 	vars       map[string]string
 	mode       string
 	Modes      map[string][]*Binding
 	Workspaces []Workspace
-	Bars       []Bar
+	Bars       map[string]Bar
 	Outputs    map[string]Output
+	Gaps       struct {
+		Inner uint
+		Outer uint
+	}
+	// Inputs map[string]Input
 }
 
+// Get config from context.
+func Get(ctx context.Context) *Config {
+	return ctx.MustGet("config").(*Config)
+}
+
+// New initializes a new default config.
+func New() *Config {
+	return &Config{
+		vars: make(map[string]string),
+		mode: "default",
+		Modes: map[string][]*Binding{
+			"default": make([]*Binding, 0),
+		},
+		Workspaces: make([]Workspace, 0),
+		Bars:       make(map[string]Bar),
+		Outputs:    make(map[string]Output),
+		Gaps: struct {
+			Inner uint
+			Outer uint
+		}{0, 0},
+	}
+}
+
+// LoadConfig loads config file from disk.
+func LoadConfig(path string) (*Config, error) {
+	content, err := loadConfig(path)
+	if err != nil {
+		return nil, err
+	}
+
+	return parseConfig(content)
+}
+
+// loadConfig tries to load config file from the path specified by the function
+// fargument or by a list of default locations.
+func loadConfig(file string) ([]byte, error) {
+	if file != "" {
+		return ioutil.ReadFile(file)
+	}
+
+	// create list of paths to look for config file.
+	xdgConfigHome := os.Getenv("XDG_CONFIG_HOME")
+	if xdgConfigHome == "" {
+		xdgConfigHome = path.Join(os.Getenv("HOME"), ".config")
+	}
+
+	paths := []string{
+		path.Join(os.Getenv("HOME"), ".flise/config"),
+		path.Join(xdgConfigHome, "flise/config"),
+		// TODO sysconfdir,
+	}
+
+	for _, file := range paths {
+		content, err := ioutil.ReadFile(file)
+		if err != nil {
+			log.Warnf("unable to load config: %s", err)
+			continue
+		}
+		return content, nil
+	}
+
+	return nil, fmt.Errorf("failed to load config file")
+}
+
+var varRegexp = regexp.MustCompile(`\$\w+`)
+
+// VarReplace replaces variables with the actual value.
+// TODO: implement this  better
+func (c *Config) VarReplace(str string) string {
+	vars := varRegexp.FindAllString(str, -1)
+	for _, v := range vars {
+		if val, ok := c.vars[v]; ok {
+			str = strings.Replace(str, v, val, -1)
+		}
+	}
+
+	return str
+}
+
+// Bindings returns a list of bindings for the current mode.
 func (c *Config) Bindings() []*Binding {
 	if b, ok := c.Modes[c.mode]; ok {
 		return b
@@ -24,132 +117,59 @@ func (c *Config) Bindings() []*Binding {
 	return nil
 }
 
-func (c *Config) AddBinding(b *Binding) bool {
-	var bindings []*Binding
-	if bs, ok := c.Modes[c.mode]; ok {
-		bindings = bs
-	} else {
-		c.Modes[c.mode] = []*Binding{b}
-		sort.Sort(Bindings(c.Modes[c.mode]))
-		return false
+// AddBinding adds a binding to the current mode.
+func (c *Config) AddBinding(mode string, b *Binding) error {
+	bindings, ok := c.Modes[mode]
+	if !ok {
+		return fmt.Errorf("failed to find %s mode in config", mode)
 	}
 
+	if len(bindings) == 0 {
+		c.Modes[mode] = []*Binding{b}
+		return nil
+	}
+
+	found := false
 	for i, binding := range bindings {
+		// if equal overwrite previous binding.
+		// TODO: debug log this?
 		if b.Equal(binding) {
-			bindings = append(bindings[:i-1], bindings[i+1:]...)
-			sort.Sort(Bindings(bindings))
-			return true
+			bindings[i] = b
+			// bindings = append(bindings[:i-1], bindings[i+1:]...)
+			found = true
+			break
 		}
 	}
 
-	return false
-}
-
-type Bindings []*Binding
-
-func (b Bindings) Len() int {
-	return len(b)
-}
-
-func (b Bindings) Swap(i, j int) {
-	b[i], b[j] = b[j], b[i]
-}
-
-func (b Bindings) Less(i, j int) bool {
-	return b[i].Less(b[j])
-}
-
-type Binding struct {
-	Modifiers uint32
-	Keys      []xkb.KeySym
-	Command   *Command
-}
-
-type Criteria int
-
-func (b *Binding) Equal(a *Binding) bool {
-	return cmpBinding(b, a) == 0
-}
-
-func (b *Binding) Less(a *Binding) bool {
-	return cmpBinding(b, a) == -1
-}
-
-func (b *Binding) Bigger(a *Binding) bool {
-	return cmpBinding(b, a) == 1
-}
-
-func cmpBinding(a, b *Binding) int {
-	modA := 0
-	modB := 0
-
-	for i := 0; i < 8; i++ {
-		if a.Modifiers&(1<<uint(i)) != 0 {
-			modA++
-		}
-
-		if b.Modifiers&(1<<uint(i)) != 0 {
-			modB++
-		}
+	if !found {
+		bindings = append(bindings, b)
 	}
 
-	if (len(b.Keys) + modB) != (len(a.Keys) + modA) {
-		return (len(b.Keys) + modB) - (len(a.Keys) + modA)
-	}
-
-	if a.Modifiers > b.Modifiers {
-		return 1
-	} else if a.Modifiers < b.Modifiers {
-		return -1
-	}
-
-	for i, keyA := range a.Keys {
-		if keyA > b.Keys[i] {
-			return 1
-		}
-
-		if keyA < b.Keys[i] {
-			return -1
-		}
-	}
-
-	return 0
+	sort.Sort(Bindings(bindings))
+	c.Modes[mode] = bindings
+	return nil
 }
 
+// Workspace defines the configuration of a workspace.
 type Workspace struct {
 	Number uint
 	Name   string
 	Active bool
 }
 
+// Bar defines the configuration of a bar.
 type Bar struct {
 	ID string
 }
 
-type Command struct {
-	Args     []string
-	Criteria *Criteria
-	Exec     func(arg ...string) error
-	Next     *Command
-}
-
-func (c *Command) Run() error {
-	err := c.Exec(c.Args...)
-	if err != nil {
-		return err
-	}
-
-	if c.Next != nil {
-		return c.Next.Run()
-	}
-
-	return nil
-}
-
+// Output defines the configuration of an output.
 type Output struct {
-	Name       string
+	ID         string
 	Enabled    bool
 	Size       wlc.Size
 	Pos        wlc.Point
-	Background string
+	Background struct {
+		Path string
+		Mode string
+	}
 }

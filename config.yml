@@ -1,0 +1,199 @@
+$mod: Mod1
+# Your preferred terminal emulator
+$term: termite
+# Your preferred application launcher
+# set $menu dmenu_run
+$menu: dmenu_run -fn "Terminus-8" -nb "#000" -nf "#fff"
+
+gaps:
+  inner: 5
+  # outer: 10
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+floating:
+  modifier: $mod
+  mouse: inverse
+
+### Key bindings
+bindings:
+  #
+  # Basics:
+  #
+
+  # start a terminal
+  - $mod+Return exec $term
+
+  # kill focused window
+  # bindsym $mod+Shift+q kill
+  - $mod+q kill
+
+  # start your launcher
+  - $mod+d exec $menu
+
+  # reload the configuration file
+  - $mod+Shift+c reload
+
+  # restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+  - $mod+Shift+r restart
+
+  # exit sway (logs you out of your wayland session)
+  - $mod+Shift+q exit
+
+  #
+  # Moving around:
+  #
+  # Move your focus around with $mod+[h|j|k|l], like vim
+  - $mod+h focus left
+  - $mod+j focus down
+  - $mod+k focus up
+  - $mod+l focus right
+  # or use $mod+[up|down|left|right]
+  - $mod+Left focus left
+  - $mod+Down focus down
+  - $mod+Up focus up
+  - $mod+Right focus right
+
+  # _move_ the focused window with the same, but add Shift
+  - $mod+Shift+h move left
+  - $mod+Shift+j move down
+  - $mod+Shift+k move up
+  - $mod+Shift+l move right
+  # ditto, with arrow keys
+  - $mod+Shift+Left move left
+  - $mod+Shift+Down move down
+  - $mod+Shift+Up move up
+  - $mod+Shift+Right move right
+
+  #
+  # Workspaces:
+  #
+
+  # switch to workspace
+  - $mod+1 workspace 1
+  - $mod+2 workspace 2
+  - $mod+3 workspace 3
+  - $mod+4 workspace 4
+  - $mod+5 workspace 5
+  - $mod+6 workspace 6
+  - $mod+7 workspace 7
+  - $mod+8 workspace 8
+  - $mod+9 workspace 9
+  # move focused container to workspace
+  - $mod+Shift+1 move container to workspace 1
+  - $mod+Shift+2 move container to workspace 2
+  - $mod+Shift+3 move container to workspace 3
+  - $mod+Shift+4 move container to workspace 4
+  - $mod+Shift+5 move container to workspace 5
+  - $mod+Shift+6 move container to workspace 6
+  - $mod+Shift+7 move container to workspace 7
+  - $mod+Shift+8 move container to workspace 8
+  - $mod+Shift+9 move container to workspace 9
+
+  #
+  # Layout stuff:
+  #
+  # You can "split" the current object of your focus with
+  # $mod+h or $mod+v, for horizontal and vertical splits
+  # respectively.
+  - $mod+m splith
+  - $mod+n splitv
+
+  # Switch the current container between different layout styles
+  - $mod+s layout stacking
+  - $mod+w layout tabbed
+  - $mod+e layout toggle split
+
+  # Make the current focus fullscreen
+  - $mod+f fullscreen
+
+  # Toggle the current focus between tiling and floating mode
+  - $mod+Shift+space floating toggle
+
+  # Swap focus between the tiling area and the floating area
+  - $mod+space focus mode_toggle
+
+  # move focus to the parent container
+  - $mod+a focus parent
+
+  #
+  # Scratchpad:
+  #
+  # Sway has a "scratchpad", which is a bag of holding for windows.
+  # You can send windows there and get them back later.
+
+  # Move the currently focused window to the scratchpad
+  - $mod+Shift+minus move scratchpad
+
+  # Show the next scratchpad window or hide the focused scratchpad window.
+  # If there are multiple scratchpad windows, this command cycles through them.
+  - $mod+minus scratchpad show
+
+  #
+  # Custom bindings
+  #
+
+  - $mod+g exec chromium
+  - $mod+BackSpace exec thunar
+  - $mod+dead_acute exec $term -e ranger
+  - $mod+i exec $term -e "mosh scw -- tmux a -t irc"
+
+modes:
+  # resize window (you can also use the mouse for that)
+  - name: resize
+    # These bindings trigger as soon as you enter the resize mode
+    bindings:
+      # Pressing left will shrink the window’s width.
+      # Pressing right will grow the window’s width.
+      # Pressing up will shrink the window’s height.
+      # Pressing down will grow the window’s height.
+      # resize <left|right|up|down> [<pixels>]
+      - h resize left 10
+      - j resize down 10
+      - k resize up 10
+      - l resize right 10
+
+      # same bindings, but for the arrow keys
+      - Left resize left 10
+      - Down resize down 10
+      - Up resize up 10
+      - Right resize right 10
+
+      # back to normal: Enter or Escape
+      - Return mode "default"
+      - Escape mode "default"
+
+
+bars:
+  - id: bar-0
+    font: Terminus, FontAwesome 8
+    position: top
+    command: i3status
+    colors:
+      background: "#323232"
+      focused_workspace: "#323232 #323232 #fed7d0"
+
+outputs:
+  - id: HDMI-1
+    background: /usr/share/sway/wallpaper.jpg
+    resolution: 1920x1080
+    position: 0,1920
+
+  - id: "*"
+    background: /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+
+# inputs:
+#   - id:
+#     click_method: <none|button_areas|clickfinger>
+#     drag_lock: <true|false>
+#     dwt: <true|false>
+#     events: <enable|disable|disable_on_external_mouse>
+#     middle_emulation: <true|false>
+#     natural_scroll: <true|false>
+#     pointer_accel: <[-1,1]>
+#     scroll_method: <none|two_finger|edge|on_button_down>
+#     tap: <true|false>
+
+#   - id: 2:7:SynPS/2_Synaptics_TouchPad
+#     dwt: false
