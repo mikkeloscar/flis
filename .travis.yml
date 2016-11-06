@@ -1,0 +1,22 @@
+sudo: required
+
+language: go
+
+arch:
+  packages:
+    - go
+    # - xorg-server-xwayland
+    - wayland
+    # - xcb-util-image
+    # - pango
+    # - cairo
+    # - gdk-pixbuf2
+    - wlc-git
+  script:
+    - make deps
+    # - make check
+    - make test
+    - make
+
+script:
+  - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"

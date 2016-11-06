@@ -1,4 +1,4 @@
-.PHONY: clean test check build
+.PHONY: clean deps test check build
 
 BINARY        ?= flise
 VERSION       ?= $(shell git describe --tags --always --dirty)
@@ -8,6 +8,9 @@ BUILD_FLAGS   ?= -v
 LDFLAGS       ?= -X main.version=$(VERSION) -w -s
 
 default: build
+
+deps:
+	go get -v -u -t ./...
 
 clean:
 	rm -rf build
