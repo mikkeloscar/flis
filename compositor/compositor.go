@@ -74,7 +74,7 @@ func (c *Compositor) KeyboardKey(view wlc.View, time uint32, modifiers wlc.Modif
 
 	conf := config.Get(c.ctx)
 
-	// TODO: maybe move to seperate function
+	// TODO: maybe move to separate function
 	for _, binding := range conf.Bindings() {
 		if modifiers.Mods^binding.Modifiers == 0 {
 			if c.validBinding(binding) {

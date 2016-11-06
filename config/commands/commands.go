@@ -74,7 +74,7 @@ func Parse(commandStr string) (*Command, error) {
 	fn, ok := cmdParseTable[cmdToken.val]
 
 	if !ok {
-		return nil, fmt.Errorf("commmand '%s' not implemented", cmdToken.val)
+		return nil, fmt.Errorf("command '%s' not implemented", cmdToken.val)
 	}
 
 	cmd, err := fn(lexer)
