@@ -29,12 +29,12 @@ func (m mockErrorCommand) String() string {
 
 func TestCommandString(t *testing.T) {
 	cmds := map[string]*Command{
-		"command1": &Command{
+		"command1": {
 			mockCommand("command1"),
 			nil,
 			nil,
 		},
-		"command1, command2": &Command{
+		"command1, command2": {
 			mockCommand("command1"),
 			nil,
 			&Command{

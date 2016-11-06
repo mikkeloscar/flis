@@ -55,7 +55,7 @@ func TestParseBindings(t *testing.T) {
 		{
 			&Config{
 				Modes: map[string][]*Binding{
-					"default": []*Binding{},
+					"default": {},
 				},
 				mode: "default",
 				vars: map[string]string{
@@ -69,7 +69,7 @@ func TestParseBindings(t *testing.T) {
 		{
 			&Config{
 				Modes: map[string][]*Binding{
-					"default": []*Binding{},
+					"default": {},
 				},
 				mode: "default",
 				vars: map[string]string{
@@ -83,7 +83,7 @@ func TestParseBindings(t *testing.T) {
 		{
 			&Config{
 				Modes: map[string][]*Binding{
-					"default": []*Binding{},
+					"default": {},
 				},
 				mode: "default",
 				vars: map[string]string{

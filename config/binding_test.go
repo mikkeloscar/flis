@@ -160,7 +160,7 @@ func TestBindingsLen(t *testing.T) {
 		},
 		{
 			Bindings([]*Binding{
-				&Binding{},
+				{},
 			}),
 			1,
 		},
@@ -175,8 +175,8 @@ func TestBindingsLen(t *testing.T) {
 
 func TestBindingsSwap(t *testing.T) {
 	bindings := Bindings([]*Binding{
-		&Binding{Raw: "1"},
-		&Binding{Raw: "2"},
+		{Raw: "1"},
+		{Raw: "2"},
 	})
 
 	bindings.Swap(0, 1)
@@ -188,8 +188,8 @@ func TestBindingsSwap(t *testing.T) {
 
 func TestBindingsLess(t *testing.T) {
 	bindings := Bindings([]*Binding{
-		&Binding{Keys: []xkb.KeySym{xkb.KeyDown, xkb.KeyF}},
-		&Binding{Keys: []xkb.KeySym{xkb.KeyUp}},
+		{Keys: []xkb.KeySym{xkb.KeyDown, xkb.KeyF}},
+		{Keys: []xkb.KeySym{xkb.KeyUp}},
 	})
 
 	if !bindings.Less(0, 1) {

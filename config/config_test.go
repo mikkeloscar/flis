@@ -116,7 +116,7 @@ func TestVarReplace(t *testing.T) {
 
 func TestBindings(t *testing.T) {
 	conf := New()
-	conf.Modes["default"] = []*Binding{&Binding{}}
+	conf.Modes["default"] = []*Binding{{}}
 
 	if len(conf.Bindings()) != 1 {
 		t.Errorf("expecter %d binding, got %d", 1, len(conf.Bindings()))
@@ -155,8 +155,8 @@ func TestAddBinding(t *testing.T) {
 		{
 			&Config{
 				Modes: map[string][]*Binding{
-					"default": []*Binding{
-						&Binding{Keys: []xkb.KeySym{xkb.KeyA}},
+					"default": {
+						{Keys: []xkb.KeySym{xkb.KeyA}},
 					},
 				},
 			},
@@ -167,9 +167,9 @@ func TestAddBinding(t *testing.T) {
 		{
 			&Config{
 				Modes: map[string][]*Binding{
-					"default": []*Binding{
-						&Binding{Keys: []xkb.KeySym{xkb.KeyA}},
-						&Binding{Keys: []xkb.KeySym{xkb.KeyB}},
+					"default": {
+						{Keys: []xkb.KeySym{xkb.KeyA}},
+						{Keys: []xkb.KeySym{xkb.KeyB}},
 					},
 				},
 			},
@@ -180,8 +180,8 @@ func TestAddBinding(t *testing.T) {
 		{
 			&Config{
 				Modes: map[string][]*Binding{
-					"default": []*Binding{
-						&Binding{Keys: []xkb.KeySym{xkb.KeyA}},
+					"default": {
+						{Keys: []xkb.KeySym{xkb.KeyA}},
 					},
 				},
 			},
