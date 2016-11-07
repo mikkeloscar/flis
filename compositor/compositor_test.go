@@ -5,9 +5,26 @@ import (
 
 	"github.com/mikkeloscar/flise/backend"
 	"github.com/mikkeloscar/flise/config"
+	"github.com/mikkeloscar/flise/layout"
 	wlc "github.com/mikkeloscar/go-wlc"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )
+
+// Test OutputCreated cb.
+func TestOutputCreated(t *testing.T) {
+	c := New(nil, nil, layout.Mock{})
+	if !c.OutputCreated(0) {
+		t.Errorf("expected output created to succeed")
+	}
+}
+
+// Test ViewCreated cb.
+func TestViewCreated(t *testing.T) {
+	c := New(nil, nil, layout.Mock{})
+	if !c.ViewCreated(0) {
+		t.Errorf("expected view created to succeed")
+	}
+}
 
 // Test PointerMotion cb.
 func TestPointerMotion(t *testing.T) {
