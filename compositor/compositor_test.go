@@ -9,6 +9,7 @@ import (
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )
 
+// Test PointerMotion cb.
 func TestPointerMotion(t *testing.T) {
 	c := New(nil, backend.Mock{}, nil)
 	if !c.PointerMotion(0, 0, &wlc.PointZero) {
