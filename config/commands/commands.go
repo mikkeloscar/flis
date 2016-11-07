@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/context"
 )
 
 // Executer is an interface describing how to execute commands.

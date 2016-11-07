@@ -5,10 +5,10 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/alecthomas/kingpin"
-	"github.com/mikkeloscar/flise/backend"
-	"github.com/mikkeloscar/flise/compositor"
-	"github.com/mikkeloscar/flise/config"
-	"github.com/mikkeloscar/flise/layout/i3"
+	"github.com/mikkeloscar/flis/backend"
+	"github.com/mikkeloscar/flis/compositor"
+	"github.com/mikkeloscar/flis/config"
+	"github.com/mikkeloscar/flis/layout/i3"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 

@@ -1,8 +1,8 @@
 package i3
 
 import (
-	"github.com/mikkeloscar/flise/context"
-	"github.com/mikkeloscar/flise/layout"
+	"github.com/mikkeloscar/flis/context"
+	"github.com/mikkeloscar/flis/layout"
 )
 
 // Move TODO: implement

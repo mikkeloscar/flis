@@ -1,8 +1,8 @@
 package layout
 
 import (
-	"github.com/mikkeloscar/flise/backend"
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/backend"
+	"github.com/mikkeloscar/flis/context"
 )
 
 // Mock mocks the layout interface.

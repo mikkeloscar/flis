@@ -2,8 +2,8 @@ package commands
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/mikkeloscar/flise/backend"
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/backend"
+	"github.com/mikkeloscar/flis/context"
 )
 
 // Exit implements the exit command.

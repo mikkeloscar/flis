@@ -1,7 +1,7 @@
 package backend
 
 import (
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/context"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 

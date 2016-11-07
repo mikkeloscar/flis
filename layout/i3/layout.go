@@ -2,7 +2,7 @@ package i3
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/mikkeloscar/flise/layout"
+	"github.com/mikkeloscar/flis/layout"
 )
 
 type Layout struct {

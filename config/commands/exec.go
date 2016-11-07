@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/mikkeloscar/flise/backend"
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/backend"
+	"github.com/mikkeloscar/flis/context"
 )
 
 // Exec implements the exec command.

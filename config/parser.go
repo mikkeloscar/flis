@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/mikkeloscar/flise/config/commands"
+	"github.com/mikkeloscar/flis/config/commands"
 	wlc "github.com/mikkeloscar/go-wlc"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 	"github.com/prometheus/common/log"

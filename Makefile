@@ -1,6 +1,6 @@
 .PHONY: clean deps test check build
 
-BINARY        ?= flise
+BINARY        ?= flis
 VERSION       ?= $(shell git describe --tags --always --dirty)
 SOURCES       = $(shell find . -name '*.go')
 GOPKGS        = $(shell go list ./... | grep -v /vendor/)

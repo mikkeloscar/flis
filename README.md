@@ -1,10 +1,10 @@
-# flise
-[![Build Status](https://travis-ci.org/mikkeloscar/flise.svg?branch=master)](https://travis-ci.org/mikkeloscar/flise)
-[![GoDoc](https://godoc.org/github.com/mikkeloscar/flise?status.svg)](https://godoc.org/github.com/mikkeloscar/flise)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mikkeloscar/flise)](https://goreportcard.com/report/github.com/mikkeloscar/flise)
-[![Coverage Status](https://coveralls.io/repos/github/mikkeloscar/flise/badge.svg)](https://coveralls.io/github/mikkeloscar/flise)
+# flis
+[![Build Status](https://travis-ci.org/mikkeloscar/flis.svg?branch=master)](https://travis-ci.org/mikkeloscar/flis)
+[![GoDoc](https://godoc.org/github.com/mikkeloscar/flis?status.svg)](https://godoc.org/github.com/mikkeloscar/flis)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mikkeloscar/flis)](https://goreportcard.com/report/github.com/mikkeloscar/flis)
+[![Coverage Status](https://coveralls.io/repos/github/mikkeloscar/flis/badge.svg)](https://coveralls.io/github/mikkeloscar/flis)
 
-flise is a Wayland tiling compositor inspired by sway and i3, written in [go][golang].
+flis is a Wayland tiling compositor inspired by sway and i3, written in [go][golang].
 
 SUPER MEGA ALPHA!!!
 

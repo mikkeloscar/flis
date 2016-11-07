@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/context"
 )
 
 type mockCommand string

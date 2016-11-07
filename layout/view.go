@@ -1,7 +1,7 @@
 package layout
 
 import (
-	"github.com/mikkeloscar/flise/backend"
+	"github.com/mikkeloscar/flis/backend"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 

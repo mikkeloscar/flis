@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/go-wlc"
 	"github.com/prometheus/common/log"
 )
@@ -76,8 +76,8 @@ func loadConfig(file string) ([]byte, error) {
 	}
 
 	paths := []string{
-		path.Join(os.Getenv("HOME"), ".flise/config"),
-		path.Join(xdgConfigHome, "flise/config"),
+		path.Join(os.Getenv("HOME"), ".flis/config"),
+		path.Join(xdgConfigHome, "flis/config"),
 		// TODO sysconfdir,
 	}
 

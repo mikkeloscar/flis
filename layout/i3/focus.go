@@ -2,8 +2,8 @@ package i3
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/mikkeloscar/flise/context"
-	"github.com/mikkeloscar/flise/layout"
+	"github.com/mikkeloscar/flis/context"
+	"github.com/mikkeloscar/flis/layout"
 )
 
 // Focused returns the focused container lowest in the three, or nil if none is

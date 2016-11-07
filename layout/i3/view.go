@@ -1,9 +1,9 @@
 package i3
 
 import (
-	"github.com/mikkeloscar/flise/backend"
-	"github.com/mikkeloscar/flise/context"
-	"github.com/mikkeloscar/flise/layout"
+	"github.com/mikkeloscar/flis/backend"
+	"github.com/mikkeloscar/flis/context"
+	"github.com/mikkeloscar/flis/layout"
 )
 
 func (l *Layout) NewView(ctx context.Context, view backend.View) {

@@ -3,7 +3,7 @@ package backend
 import (
 	"testing"
 
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/context"
 )
 
 func TestMustGetBackend(t *testing.T) {

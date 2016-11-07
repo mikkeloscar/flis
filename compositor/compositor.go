@@ -2,11 +2,11 @@ package compositor
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/mikkeloscar/flise/backend"
-	"github.com/mikkeloscar/flise/config"
-	"github.com/mikkeloscar/flise/context"
-	"github.com/mikkeloscar/flise/input"
-	"github.com/mikkeloscar/flise/layout"
+	"github.com/mikkeloscar/flis/backend"
+	"github.com/mikkeloscar/flis/config"
+	"github.com/mikkeloscar/flis/context"
+	"github.com/mikkeloscar/flis/input"
+	"github.com/mikkeloscar/flis/layout"
 	wlc "github.com/mikkeloscar/go-wlc"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )

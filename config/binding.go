@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/mikkeloscar/flise/config/commands"
+	"github.com/mikkeloscar/flis/config/commands"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )
 

@@ -6,7 +6,7 @@ import (
 	"path"
 	"testing"
 
-	"github.com/mikkeloscar/flise/context"
+	"github.com/mikkeloscar/flis/context"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )
 
@@ -19,7 +19,7 @@ func setupEnvironment(t *testing.T) (string, string) {
 	}
 
 	wd := path.Join(pwd, ".tmp")
-	knownPath := path.Join(wd, ".flise")
+	knownPath := path.Join(wd, ".flis")
 	err = os.MkdirAll(knownPath, 0755)
 	if err != nil {
 		t.Errorf("should not fail: %s", err)
