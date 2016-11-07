@@ -12,5 +12,10 @@ func (m Mock) Exec(bin string, arg ...string) {}
 // Terminate mocks terminating the compositor.
 func (m Mock) Terminate() {}
 
-// PointerSetPosition mokcs setting pointer position.
+// PointerSetPosition mocks setting pointer position.
 func (m Mock) PointerSetPosition(pos wlc.Point) {}
+
+// KeyboardGetKeysymForKey mocks getting keysym fro key.
+func (m Mock) KeyboardGetKeysymForKey(key uint32, mods *wlc.Modifiers) uint32 {
+	return key
+}

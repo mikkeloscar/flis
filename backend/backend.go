@@ -12,6 +12,7 @@ type Backend interface {
 	Exec(bin string, arg ...string)
 	Terminate()
 	PointerSetPosition(pos wlc.Point)
+	KeyboardGetKeysymForKey(key uint32, mods *wlc.Modifiers) uint32
 }
 
 // Get backend from context.

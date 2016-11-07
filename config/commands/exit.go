@@ -23,6 +23,6 @@ func (e Exit) String() string {
 }
 
 // parseExec parses an exit command definition.
-func parseExit(lex *lexer) (command, error) {
+func parseExit(lex *lexer) (Executer, error) {
 	return Exit{}, nil
 }

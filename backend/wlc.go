@@ -19,3 +19,9 @@ func (w WLC) Terminate() {
 func (w WLC) PointerSetPosition(pos wlc.Point) {
 	wlc.PointerSetPosition(pos)
 }
+
+// KeyboardGetKeysymForKey is an utility function to convert raw keycode to
+// keysym. Passed modifiers may transform the key.
+func (w WLC) KeyboardGetKeysymForKey(key uint32, mods *wlc.Modifiers) uint32 {
+	return wlc.KeyboardGetKeysymForKey(key, mods)
+}

@@ -64,7 +64,7 @@ func (c *Compositor) PointerMotion(view wlc.View, time uint32, pos *wlc.Point) b
 // KeyboardKey is the callback triggered when a key is pressed or released in
 // the compositor.
 func (c *Compositor) KeyboardKey(view wlc.View, time uint32, modifiers wlc.Modifiers, key uint32, state wlc.KeyState) bool {
-	sym := xkb.KeySym(wlc.KeyboardGetKeysymForKey(key, nil))
+	sym := xkb.KeySym(c.backend.KeyboardGetKeysymForKey(key, nil))
 
 	if state == wlc.KeyStatePressed {
 		c.keyState.PressKey(sym, key)

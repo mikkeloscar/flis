@@ -6,8 +6,8 @@ import (
 	"github.com/mikkeloscar/flise/context"
 )
 
-// command is an interface for commands.
-type command interface {
+// Executer is an interface describing how to execute commands.
+type Executer interface {
 	Exec(context.Context) error
 	String() string
 }
@@ -17,7 +17,7 @@ type Criteria int
 
 // Command defines a command with criteria and possible chained sub commands.
 type Command struct {
-	command
+	Executer
 	// TODO: criteria
 	Criteria *Criteria
 	Next     *Command
@@ -27,9 +27,9 @@ type Command struct {
 func (c *Command) String() string {
 	// TODO: criteria
 	if c.Next != nil {
-		return c.command.String() + ", " + c.Next.String()
+		return c.Executer.String() + ", " + c.Next.String()
 	}
-	return c.command.String()
+	return c.Executer.String()
 }
 
 // Run runs a command and any subsequent commands if it's chained.
@@ -47,7 +47,7 @@ func (c *Command) Run(ctx context.Context) error {
 	return nil
 }
 
-type commandParser func(lex *lexer) (command, error)
+type commandParser func(lex *lexer) (Executer, error)
 
 // table mapping command names to parse functions able to parse the command
 // definitions.
@@ -81,7 +81,7 @@ func Parse(commandStr string) (*Command, error) {
 	if err != nil {
 		return nil, err
 	}
-	command.command = cmd
+	command.Executer = cmd
 
 	return command, nil
 }
