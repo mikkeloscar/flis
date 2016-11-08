@@ -51,16 +51,21 @@ type Layout interface {
 }
 
 // Get layout from context.
-func Get(ctx context.Context) *Layout {
-	return ctx.MustGet("layout").(*Layout)
+func Get(ctx context.Context) Layout {
+	return ctx.MustGet("layout").(Layout)
 }
 
+// ContainerType is a type of container e.g. Root or Output.
 type ContainerType int
 
 const (
+	// CRoot is the root container type.
 	CRoot ContainerType = iota
+	// COutput is the output container type.
 	COutput
+	// CWorkspace is the workspace container type.
 	CWorkspace
+	// CView is the view container type.
 	CView
 )
 
@@ -92,7 +97,9 @@ type Container interface {
 	// Visible returns true if the container is visible.
 	Visible() bool
 
+	// AddChild adds a child container.
 	AddChild(Container)
 
+	// Type returns the type of a container.
 	Type() ContainerType
 }

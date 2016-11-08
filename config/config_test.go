@@ -87,6 +87,7 @@ func TestLoadConfig(t *testing.T) {
 	clearEnvironment(wd, t)
 }
 
+// TestGetConfig tests getting config from context.
 func TestGetConfig(t *testing.T) {
 	ctx := context.Context(map[string]interface{}{
 		"config": New(),
