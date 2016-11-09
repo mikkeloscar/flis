@@ -4,7 +4,7 @@
 
 // based on the lexer tests from: src/pkg/text/template/parse/lex_test.go (golang source)
 
-package commands
+package config
 
 import (
 	"fmt"
@@ -118,7 +118,7 @@ func collect(t *lexTest) (items []item) {
 }
 
 // equal checks if two items are equal.
-func equal(i1, i2 []item, checkPos bool) bool {
+func equalItems(i1, i2 []item, checkPos bool) bool {
 	if len(i1) != len(i2) {
 		return false
 	}
@@ -139,7 +139,7 @@ func equal(i1, i2 []item, checkPos bool) bool {
 func TestLex(t *testing.T) {
 	for _, test := range lexTests {
 		items := collect(&test)
-		if !equal(items, test.items, false) {
+		if !equalItems(items, test.items, false) {
 			t.Errorf("%s: got\n\t%+v\nexpected\n\t%v", test.name, items, test.items)
 		}
 	}

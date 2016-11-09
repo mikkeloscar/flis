@@ -1,4 +1,4 @@
-package commands
+package config
 
 import (
 	log "github.com/Sirupsen/logrus"
@@ -23,6 +23,6 @@ func (e Exit) String() string {
 }
 
 // parseExec parses an exit command definition.
-func parseExit(lex *lexer) (Executer, error) {
+func parseExit(lex *lexer, config *Config) (Executer, error) {
 	return Exit{}, nil
 }

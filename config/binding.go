@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/mikkeloscar/flis/config/commands"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )
 
@@ -17,7 +16,7 @@ const (
 type Binding struct {
 	Modifiers uint32
 	Keys      []xkb.KeySym
-	Command   *commands.Command
+	Command   *Command
 	Raw       string
 }
 

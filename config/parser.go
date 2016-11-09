@@ -5,7 +5,6 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/mikkeloscar/flis/config/commands"
 	wlc "github.com/mikkeloscar/go-wlc"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 	"github.com/prometheus/common/log"
@@ -140,7 +139,7 @@ func parseBinding(config *Config, bindingStr string) (*Binding, error) {
 		binding.Keys = append(binding.Keys, sym)
 	}
 
-	binding.Command, err = commands.Parse(split[1])
+	binding.Command, err = cmdParse(split[1], config)
 	if err != nil {
 		return nil, err
 	}

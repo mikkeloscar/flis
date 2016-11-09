@@ -6,7 +6,6 @@ import (
 
 	"github.com/mikkeloscar/flis/backend"
 	"github.com/mikkeloscar/flis/config"
-	"github.com/mikkeloscar/flis/config/commands"
 	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/flis/layout"
 	wlc "github.com/mikkeloscar/go-wlc"
@@ -60,7 +59,7 @@ func TestKeyboardKey(t *testing.T) {
 	conf := config.New()
 	binding := &config.Binding{
 		Keys: []xkb.KeySym{xkb.KeyA},
-		Command: &commands.Command{
+		Command: &config.Command{
 			Executer: mockExecuter{},
 		},
 	}

@@ -1,4 +1,4 @@
-package commands
+package config
 
 import (
 	"testing"
@@ -39,7 +39,7 @@ func TestParseExec(t *testing.T) {
 
 	for cmd, valid := range cmds {
 		lexer := lex(cmd)
-		_, err := parseExec(lexer)
+		_, err := parseExec(lexer, nil)
 		if err != nil && valid {
 			t.Errorf("parsing '%s' should not fail", cmd)
 		}

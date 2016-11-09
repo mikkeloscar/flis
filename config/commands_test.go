@@ -1,4 +1,4 @@
-package commands
+package config
 
 import (
 	"fmt"
@@ -111,7 +111,7 @@ func TestCommandParse(t *testing.T) {
 	}
 
 	for cmd, valid := range cmds {
-		_, err := Parse(cmd)
+		_, err := cmdParse(cmd, nil)
 		if err != nil && valid {
 			t.Errorf("parsing '%s' should not fail, got: %s", cmd, err)
 		}

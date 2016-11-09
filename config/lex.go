@@ -4,7 +4,7 @@
 
 // based on the lexer from: src/pkg/text/template/parse/lex.go (golang source)
 
-package commands
+package config
 
 import (
 	"fmt"

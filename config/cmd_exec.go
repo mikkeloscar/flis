@@ -1,4 +1,4 @@
-package commands
+package config
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ func (e Exec) String() string {
 }
 
 // parseExec parses an exec command definition.
-func parseExec(lex *lexer) (Executer, error) {
+func parseExec(lex *lexer, config *Config) (Executer, error) {
 	var args []string
 
 	for t := lex.nextItem(); t.typ == itemString; t = lex.nextItem() {

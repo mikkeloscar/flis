@@ -1,4 +1,4 @@
-package commands
+package config
 
 import (
 	"testing"
@@ -29,7 +29,7 @@ func TestExitString(t *testing.T) {
 }
 
 func TestParseExit(t *testing.T) {
-	_, err := parseExit(lex(""))
+	_, err := parseExit(lex(""), nil)
 	if err != nil {
 		t.Errorf("parseExit should not fail, got: %s", err)
 	}

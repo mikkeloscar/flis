@@ -1,4 +1,4 @@
-package commands
+package config
 
 import (
 	"fmt"
@@ -47,7 +47,7 @@ func (c *Command) Run(ctx context.Context) error {
 	return nil
 }
 
-type commandParser func(lex *lexer) (Executer, error)
+type commandParser func(lex *lexer, config *Config) (Executer, error)
 
 // table mapping command names to parse functions able to parse the command
 // definitions.
@@ -56,8 +56,8 @@ var cmdParseTable = map[string]commandParser{
 	"exit": parseExit,
 }
 
-// Parse parses a command string into a command structure.
-func Parse(commandStr string) (*Command, error) {
+// cmdParse parses a command string into a command structure.
+func cmdParse(commandStr string, config *Config) (*Command, error) {
 	// TODO: criteria
 
 	lexer := lex(commandStr)
@@ -77,7 +77,7 @@ func Parse(commandStr string) (*Command, error) {
 		return nil, fmt.Errorf("command '%s' not implemented", cmdToken.val)
 	}
 
-	cmd, err := fn(lexer)
+	cmd, err := fn(lexer, config)
 	if err != nil {
 		return nil, err
 	}
