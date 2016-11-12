@@ -2,6 +2,7 @@ package layout
 
 import (
 	"reflect"
+	"sort"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/mikkeloscar/flis/backend"
@@ -70,9 +71,15 @@ func (o *Output) Parent() Container {
 func (o *Output) AddChild(workspace Container) {
 	switch w := workspace.(type) {
 	case *Workspace:
-		// TODO: sort workspaces
-		log.Debugf("Added workspace %s for output %d", w.Name(), o.Name())
+		log.Debugf("Added workspace '%s' for output %s", w.Name(), o.Name())
 		o.workspaces = append(o.workspaces, w)
+		// sort workspaces by num
+		sort.Sort(Workspaces(o.workspaces))
+
+		// if there is only one workspace on the output then focus it.
+		if len(o.workspaces) == 1 {
+			o.focused = w
+		}
 	default:
 		log.Errorf("Failed to add workspace, invalid container type: %s", reflect.TypeOf(workspace))
 	}

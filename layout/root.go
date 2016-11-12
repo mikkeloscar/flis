@@ -2,6 +2,7 @@ package layout
 
 import (
 	"reflect"
+	"sort"
 
 	log "github.com/Sirupsen/logrus"
 	wlc "github.com/mikkeloscar/go-wlc"
@@ -64,7 +65,24 @@ func (r *Root) AddChild(output Container) {
 		// TODO: focus new output?
 		log.Debugf("Added output %s", o.Name())
 		r.outputs[o.Name()] = o
+
+		// if there is only one output then focus it.
+		if len(r.outputs) == 1 {
+			r.focused = o
+		}
 	default:
 		log.Errorf("Failed to add output, invalid container type: %s", reflect.TypeOf(output))
 	}
+}
+
+// SortedWorkspaces returns an aggregated sorted list of workspaces on all
+// outputs.
+func (r *Root) SortedWorkspaces() []*Workspace {
+	var ws []*Workspace
+	for _, output := range r.outputs {
+		ws = append(ws, output.workspaces...)
+	}
+
+	sort.Sort(Workspaces(ws))
+	return ws
 }

@@ -19,7 +19,7 @@ type Config struct {
 	vars       map[string]string
 	mode       string
 	Modes      map[string][]*Binding
-	Workspaces []Workspace
+	Workspaces map[uint]string
 	Bars       map[string]Bar
 	Outputs    map[string]Output
 	Gaps       struct {
@@ -42,7 +42,7 @@ func New() *Config {
 		Modes: map[string][]*Binding{
 			"default": make([]*Binding, 0),
 		},
-		Workspaces: make([]Workspace, 0),
+		Workspaces: make(map[uint]string, 0),
 		Bars:       make(map[string]Bar),
 		Outputs:    make(map[string]Output),
 		Gaps: struct {
@@ -148,13 +148,6 @@ func (c *Config) AddBinding(mode string, b *Binding) error {
 	sort.Sort(Bindings(bindings))
 	c.Modes[mode] = bindings
 	return nil
-}
-
-// Workspace defines the configuration of a workspace.
-type Workspace struct {
-	Number uint
-	Name   string
-	Active bool
 }
 
 // Bar defines the configuration of a bar.

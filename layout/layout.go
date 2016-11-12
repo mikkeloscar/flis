@@ -37,7 +37,7 @@ type Layout interface {
 	NewOutput(ctx context.Context, output backend.Output)
 
 	// NewWorkspace initializes a new workspace.
-	NewWorkspace(ctx context.Context, output *Output, name string)
+	NewWorkspace(ctx context.Context, output *Output, name string, num uint)
 
 	// NewView initializes a new view.
 	NewView(ctx context.Context, view backend.View)

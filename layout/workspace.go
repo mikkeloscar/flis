@@ -4,15 +4,17 @@ import wlc "github.com/mikkeloscar/go-wlc"
 
 type Workspace struct {
 	name       string
+	Num        uint
 	containers []Container
 	floating   []Container
 	focused    Container
 	output     *Output
 }
 
-func NewWorkspace(name string, output *Output) *Workspace {
+func NewWorkspace(name string, num uint, output *Output) *Workspace {
 	return &Workspace{
 		name:       name,
+		Num:        num,
 		containers: make([]Container, 0),
 		floating:   make([]Container, 0),
 		focused:    nil,
@@ -24,6 +26,7 @@ func (w *Workspace) Type() ContainerType {
 	return CWorkspace
 }
 
+// Name return the name of the workspace.
 func (w *Workspace) Name() string {
 	return w.name
 }
@@ -33,18 +36,22 @@ func (w *Workspace) Geometry() *wlc.Geometry {
 	return w.output.Geometry()
 }
 
+// Children returns a list of (non-floating) containers on the workspace.
 func (w *Workspace) Children() []Container {
 	return w.containers
 }
 
+// Floating returns a list of floating containers on the workspace.
 func (w *Workspace) Floating() []Container {
 	return w.floating
 }
 
+// Focused returns the focused child container of the workspace.
 func (w *Workspace) Focused() Container {
 	return w.focused
 }
 
+// Fullscreen fullscreens the workspace.
 func (w *Workspace) Fullscreen() Container {
 	if w.focused != nil {
 		return w.focused.Fullscreen()
@@ -52,14 +59,36 @@ func (w *Workspace) Fullscreen() Container {
 	return nil
 }
 
+// Parent returns the parent output of the workspace.
 func (w *Workspace) Parent() Container {
 	return w.output
 }
 
+// AddChild adds a child container to the workspace.
 func (w *Workspace) AddChild(container Container) {
 	// TODO:
 }
 
+// Visible returns true if workspace is visible.
 func (w *Workspace) Visible() bool {
 	return w.output.Visible() && w.output.focused == w
+}
+
+// workspaces is a list of workspaces.
+type Workspaces []*Workspace
+
+// Len returns the length of the workspace list.
+func (w Workspaces) Len() int {
+	return len(w)
+}
+
+// Swap swaps two workspaces in the workspace list.
+func (w Workspaces) Swap(i, j int) {
+	w[i], w[j] = w[j], w[i]
+}
+
+// Less returns true if workspace at index i should be sorted before workspace
+// at index j.
+func (w Workspaces) Less(i, j int) bool {
+	return w[i].Num < w[j].Num
 }
