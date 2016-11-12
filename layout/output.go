@@ -69,6 +69,13 @@ func (o *Output) Parent() Container {
 	return o.root
 }
 
+// Visible return true if the output is visible. Currently an output can only
+// be visible.
+func (o *Output) Visible() bool {
+	// TODO: handle possible invisible cases
+	return true
+}
+
 // AddChild adds a workspace to the output.
 func (o *Output) AddChild(workspace Container) {
 	switch w := workspace.(type) {
@@ -85,11 +92,4 @@ func (o *Output) AddChild(workspace Container) {
 	default:
 		log.Errorf("Failed to add workspace, invalid container type: %s", reflect.TypeOf(workspace))
 	}
-}
-
-// Visible return true if the output is visible. Currently an output can only
-// be visible.
-func (o *Output) Visible() bool {
-	// TODO: handle possible invisible cases
-	return true
 }

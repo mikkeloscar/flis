@@ -6,19 +6,6 @@ import (
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 
-// mockOutputRes mocks the backend.Output interface with a size of 0x0.
-type mockOutputRes struct {
-	mockOutput
-}
-
-func (m mockOutputRes) GetResolution() *wlc.Size {
-	return &wlc.SizeZero
-}
-
-func (m mockOutputRes) GetVirtualResolution() *wlc.Size {
-	return &wlc.SizeZero
-}
-
 // TestWorkspaceType tests getting the workspace type from a workspace container.
 func TestWorkspaceType(t *testing.T) {
 	w := NewWorkspace("1", 1, nil)
@@ -97,7 +84,7 @@ func TestWorkspaceVisible(t *testing.T) {
 	}
 }
 
-// TestWorkspaceAddChild tests adding output to root container.
+// TestWorkspaceAddChild tests adding view to a workspace.
 func TestWorkspaceAddChild(t *testing.T) {
 	w := NewWorkspace("1", 1, nil)
 	v := NewView(wlc.View(0), w)
