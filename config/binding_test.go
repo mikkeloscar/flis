@@ -149,7 +149,7 @@ func TestBindingBigger(t *testing.T) {
 	}
 }
 
-// TestBindingsLen tests getting correct lenght of binding list.
+// TestBindingsLen tests getting correct length of binding list.
 func TestBindingsLen(t *testing.T) {
 	bindings := []struct {
 		bindings Bindings

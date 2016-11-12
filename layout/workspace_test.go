@@ -107,7 +107,7 @@ func TestWorkspaceAddChild(t *testing.T) {
 	w.AddChild(v2)
 }
 
-// TestWorkspacesLen tests getting correct lenght of workspace list.
+// TestWorkspacesLen tests getting correct length of workspace list.
 func TestWorkspacesLen(t *testing.T) {
 	workspaces := []struct {
 		workspaces Workspaces
