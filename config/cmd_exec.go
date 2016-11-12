@@ -29,7 +29,10 @@ func parseExec(lex *lexer, config *Config) (Executer, error) {
 	var args []string
 
 	for t := lex.nextItem(); t.typ == itemString; t = lex.nextItem() {
-		args = append(args, fmt.Sprintf(`"%s"`, t.val))
+		if strings.ContainsRune(t.val, ' ') {
+			t.val = fmt.Sprintf(`"%s"`, t.val)
+		}
+		args = append(args, t.val)
 	}
 
 	if len(args) == 0 {
