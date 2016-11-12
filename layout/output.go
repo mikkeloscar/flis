@@ -57,13 +57,6 @@ func (o *Output) Focused() Container {
 	return o.focused
 }
 
-func (o *Output) Fullscreen() Container {
-	if o.focused != nil {
-		return o.focused.Fullscreen()
-	}
-	return nil
-}
-
 func (o *Output) Parent() Container {
 	return o.root
 }

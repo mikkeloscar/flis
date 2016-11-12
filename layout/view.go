@@ -47,8 +47,9 @@ func (v *View) Focused() Container {
 	return nil
 }
 
-func (v *View) Fullscreen() Container {
-	return nil
+// Fullscreen returns true if view is in fullscreen mode.
+func (v *View) Fullscreen() bool {
+	return v.GetState() == wlc.BitFullscreen
 }
 
 func (v *View) Parent() Container {

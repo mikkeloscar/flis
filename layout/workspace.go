@@ -55,14 +55,6 @@ func (w *Workspace) Focused() Container {
 	return w.focused
 }
 
-// Fullscreen fullscreens the workspace.
-func (w *Workspace) Fullscreen() Container {
-	if w.focused != nil {
-		return w.focused.Fullscreen()
-	}
-	return nil
-}
-
 // Parent returns the parent output of the workspace.
 func (w *Workspace) Parent() Container {
 	return w.output

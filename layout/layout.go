@@ -89,7 +89,7 @@ type Container interface {
 	// SetFocused set focused child of the container.
 	// SetFocused(Container)
 	// Fullscreen returns the fullscreened view of a container, if any.
-	Fullscreen() Container
+	// Fullscreen() Container
 
 	// Parent of the container.
 	Parent() Container

@@ -8,11 +8,14 @@ import (
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 
+// Root is the root container in a layout. The root container manages the
+// output containers.
 type Root struct {
 	outputs map[string]*Output
 	focused *Output
 }
 
+// NewRoot initializes a new empty root container.
 func NewRoot() *Root {
 	return &Root{
 		outputs: make(map[string]*Output),
@@ -20,14 +23,18 @@ func NewRoot() *Root {
 	}
 }
 
+// Type returns the root container type.
 func (r *Root) Type() ContainerType {
 	return CRoot
 }
 
+// Geometry returns the root container geometry which is always nil.
 func (r *Root) Geometry() *wlc.Geometry {
 	return nil
 }
 
+// Children returns a list for output containers attached to the root
+// container.
 func (r *Root) Children() []Container {
 	containers := make([]Container, 0, len(r.outputs))
 	for _, o := range r.outputs {
@@ -36,33 +43,32 @@ func (r *Root) Children() []Container {
 	return containers
 }
 
+// Floating always returns nil because the root container can't have floating
+// child containers.
 func (r *Root) Floating() []Container {
 	return nil
 }
 
+// Focused returns the focused output container.
 func (r *Root) Focused() Container {
 	return r.focused
 }
 
+// Parent returns nil because the root container has no parents.
 func (r *Root) Parent() Container {
 	return nil
 }
 
-func (r *Root) Fullscreen() Container {
-	if r.focused != nil {
-		return r.focused.Fullscreen()
-	}
-	return nil
-}
-
+// Visible returns true if the container is visible. The root container is
+// always visible.
 func (r *Root) Visible() bool {
 	return true
 }
 
+// AddChild adds an output to the root container.
 func (r *Root) AddChild(output Container) {
 	switch o := output.(type) {
 	case *Output:
-		// TODO: focus new output?
 		log.Debugf("Added output %s", o.Name())
 		r.outputs[o.Name()] = o
 
