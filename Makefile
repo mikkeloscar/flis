@@ -19,7 +19,7 @@ test:
 	go test -v $(GOPKGS)
 
 check:
-	golint ./... | grep -v /vendor/
+	golint ./...
 	go vet -v $(GOPKGS)
 
 build: build/$(BINARY)

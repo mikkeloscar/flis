@@ -45,6 +45,7 @@ func (o *Output) Geometry() *wlc.Geometry {
 // 	return o.GetVirtualResolution()
 // }
 
+// Children returns a list of workspaces attached to the output.
 func (o *Output) Children() []Container {
 	containers := make([]Container, len(o.workspaces))
 	for i, w := range o.workspaces {
@@ -53,18 +54,22 @@ func (o *Output) Children() []Container {
 	return containers
 }
 
+// Floating returns nil because an output can't have any floating children.
 func (o *Output) Floating() []Container {
 	return nil
 }
 
+// Focused returns the focused child container of the output.
 func (o *Output) Focused() Container {
 	return o.focused
 }
 
+// Parent returns the root container.
 func (o *Output) Parent() Container {
 	return o.root
 }
 
+// AddChild adds a workspace to the output.
 func (o *Output) AddChild(workspace Container) {
 	switch w := workspace.(type) {
 	case *Workspace:
@@ -82,6 +87,8 @@ func (o *Output) AddChild(workspace Container) {
 	}
 }
 
+// Visible return true if the output is visible. Currently an output can only
+// be visible.
 func (o *Output) Visible() bool {
 	// TODO: handle possible invisible cases
 	return true
