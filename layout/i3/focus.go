@@ -22,12 +22,14 @@ func (l *Layout) Focused(ctx context.Context) layout.Container {
 	return nil
 }
 
+// Focus sets focus to a container.
 func (l *Layout) Focus(ctx context.Context, c layout.Container) {
 	// TODO: set focus to a container
 	// return true
 
 }
 
+// FocusedByType returns the currently focused container by type.
 func (l *Layout) FocusedByType(ctx context.Context, typ layout.ContainerType) layout.Container {
 	var current layout.Container
 	current = l.root

@@ -5,16 +5,19 @@ import (
 	"github.com/mikkeloscar/flis/layout"
 )
 
+// Layout defines an i3 inspired layout handler.
 type Layout struct {
 	root *layout.Root
 }
 
+// New initiliazes a new empty layout.
 func New() *Layout {
 	return &Layout{
 		root: layout.NewRoot(),
 	}
 }
 
+// Arrange arranges the layout starting from container specified by start.
 func (l *Layout) Arrange(start layout.Container) {
 	// TODO: implement with more than one view
 	switch c := start.(type) {
@@ -28,6 +31,8 @@ func (l *Layout) Arrange(start layout.Container) {
 	}
 }
 
+// ArrangeRoot arranges the layout starting from the root container and all the
+// way down through the layout tree.
 func (l *Layout) ArrangeRoot() {
 	l.Arrange(l.root)
 }

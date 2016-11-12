@@ -6,6 +6,8 @@ import (
 	"github.com/mikkeloscar/flis/layout"
 )
 
+// NewView adds a new view to the layout. The view will be added to the
+// currently focused container.
 func (l *Layout) NewView(ctx context.Context, view backend.View) {
 	// TODO: wlc, set size
 	// TODO: check if sibling or parent

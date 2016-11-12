@@ -2,6 +2,8 @@ package layout
 
 import wlc "github.com/mikkeloscar/go-wlc"
 
+// Workspace is a workspace container in the layout. A workspace has a list of
+// tiled containers plus a list of floating containers associated with it.
 type Workspace struct {
 	name       string
 	Num        uint
@@ -11,6 +13,7 @@ type Workspace struct {
 	output     *Output
 }
 
+// NewWorkspace initializes a new empty workspace container.
 func NewWorkspace(name string, num uint, output *Output) *Workspace {
 	return &Workspace{
 		name:       name,
@@ -22,6 +25,7 @@ func NewWorkspace(name string, num uint, output *Output) *Workspace {
 	}
 }
 
+// Type returns the workspace container type.
 func (w *Workspace) Type() ContainerType {
 	return CWorkspace
 }
@@ -74,7 +78,7 @@ func (w *Workspace) Visible() bool {
 	return w.output.Visible() && w.output.focused == w
 }
 
-// workspaces is a list of workspaces.
+// Workspaces is a list of workspaces.
 type Workspaces []*Workspace
 
 // Len returns the length of the workspace list.
