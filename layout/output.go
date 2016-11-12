@@ -9,6 +9,7 @@ import (
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 
+// Output describes an output in the layout.
 type Output struct {
 	backend.Output
 	workspaces []*Workspace
@@ -16,6 +17,7 @@ type Output struct {
 	root       *Root
 }
 
+// NewOutput initializes a new empty output.
 func NewOutput(output backend.Output, root *Root) *Output {
 	return &Output{
 		output,
@@ -25,10 +27,12 @@ func NewOutput(output backend.Output, root *Root) *Output {
 	}
 }
 
+// Type returns the output container type.
 func (o *Output) Type() ContainerType {
 	return COutput
 }
 
+// Geometry returns the geometry of the output.
 func (o *Output) Geometry() *wlc.Geometry {
 	// TODO: relative to other outputs
 	return &wlc.Geometry{
@@ -64,7 +68,6 @@ func (o *Output) Parent() Container {
 func (o *Output) AddChild(workspace Container) {
 	switch w := workspace.(type) {
 	case *Workspace:
-		log.Debugf("Added workspace '%s' for output %s", w.Name(), o.Name())
 		o.workspaces = append(o.workspaces, w)
 		// sort workspaces by num
 		sort.Sort(Workspaces(o.workspaces))
@@ -73,6 +76,7 @@ func (o *Output) AddChild(workspace Container) {
 		if len(o.workspaces) == 1 {
 			o.focused = w
 		}
+		log.Debugf("Added workspace '%s' to output %s", w.Name(), o.Name())
 	default:
 		log.Errorf("Failed to add workspace, invalid container type: %s", reflect.TypeOf(workspace))
 	}

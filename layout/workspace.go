@@ -1,6 +1,11 @@
 package layout
 
-import wlc "github.com/mikkeloscar/go-wlc"
+import (
+	"reflect"
+
+	log "github.com/Sirupsen/logrus"
+	wlc "github.com/mikkeloscar/go-wlc"
+)
 
 // Workspace is a workspace container in the layout. A workspace has a list of
 // tiled containers plus a list of floating containers associated with it.
@@ -62,7 +67,16 @@ func (w *Workspace) Parent() Container {
 
 // AddChild adds a child container to the workspace.
 func (w *Workspace) AddChild(container Container) {
-	// TODO:
+	switch c := container.(type) {
+	case *View:
+		w.containers = append(w.containers, c)
+
+		// focus added container
+		w.focused = c
+		log.Debugf("Added container '%s' to workspace %s", c.Title(), w.Name())
+	default:
+		log.Errorf("Failed to add container, invalid container type: %s", reflect.TypeOf(container))
+	}
 }
 
 // Visible returns true if workspace is visible.

@@ -149,6 +149,7 @@ func TestBindingBigger(t *testing.T) {
 	}
 }
 
+// TestBindingsLen tests getting correct lenght of binding list.
 func TestBindingsLen(t *testing.T) {
 	bindings := []struct {
 		bindings Bindings
@@ -173,6 +174,7 @@ func TestBindingsLen(t *testing.T) {
 	}
 }
 
+// TestBindingsSwap tests swapping bindings in binding list.
 func TestBindingsSwap(t *testing.T) {
 	bindings := Bindings([]*Binding{
 		{Raw: "1"},
@@ -181,11 +183,13 @@ func TestBindingsSwap(t *testing.T) {
 
 	bindings.Swap(0, 1)
 
-	if bindings[0].Raw != "2" && bindings[1].Raw != "1" {
+	if bindings[0].Raw != "2" || bindings[1].Raw != "1" {
 		t.Errorf("expected bindings to be swapped")
 	}
 }
 
+// TestBindingsLess tests bindings less function. The binding with more keys is
+// considered less than the other binding.
 func TestBindingsLess(t *testing.T) {
 	bindings := Bindings([]*Binding{
 		{Keys: []xkb.KeySym{xkb.KeyDown, xkb.KeyF}},
