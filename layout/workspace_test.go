@@ -56,7 +56,7 @@ func TestWorkspaceFloating(t *testing.T) {
 	}
 }
 
-// TestWorkspaceFocused tests getting focused container from the root container.
+// TestWorkspaceFocused tests getting focused container from the workspace container.
 func TestWorkspaceFocused(t *testing.T) {
 	w := NewWorkspace("1", 1, nil)
 	v := NewView(wlc.View(0), w)
