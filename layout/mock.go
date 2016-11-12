@@ -24,7 +24,7 @@ func (m Mock) FocusedByType(ctx context.Context, typ ContainerType) Container { 
 func (m Mock) NewOutput(ctx context.Context, output backend.Output) {}
 
 // NewWorkspace mocks initializing a new workspace.
-func (m Mock) NewWorkspace(ctx context.Context, output *Output, name string) {}
+func (m Mock) NewWorkspace(ctx context.Context, output *Output, name string, num uint) {}
 
 // NewView mocks initializing a new view.
 func (m Mock) NewView(ctx context.Context, view backend.View) {}

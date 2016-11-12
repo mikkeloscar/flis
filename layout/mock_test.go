@@ -11,7 +11,7 @@ func TestMock(t *testing.T) {
 	m.Focused(nil)
 	m.FocusedByType(nil, CRoot)
 	m.NewOutput(nil, nil)
-	m.NewWorkspace(nil, nil, "")
+	m.NewWorkspace(nil, nil, "", 0)
 	m.NewView(nil, nil)
 	m.ArrangeRoot()
 	m.Arrange(nil)
