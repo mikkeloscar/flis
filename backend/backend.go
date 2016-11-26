@@ -1,7 +1,8 @@
 package backend
 
 import (
-	"github.com/mikkeloscar/flis/context"
+	"context"
+
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 
@@ -17,5 +18,5 @@ type Backend interface {
 
 // Get backend from context.
 func Get(ctx context.Context) Backend {
-	return ctx.MustGet("backend").(Backend)
+	return ctx.Value("backend").(Backend)
 }

@@ -1,11 +1,11 @@
 package i3
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/mikkeloscar/flis/backend"
 	"github.com/mikkeloscar/flis/config"
-	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/flis/layout"
 )
 

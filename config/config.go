@@ -1,6 +1,7 @@
 package config
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -9,7 +10,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/go-wlc"
 	"github.com/prometheus/common/log"
 )
@@ -31,7 +31,7 @@ type Config struct {
 
 // Get config from context.
 func Get(ctx context.Context) *Config {
-	return ctx.MustGet("config").(*Config)
+	return ctx.Value("config").(*Config)
 }
 
 // New initializes a new default config.

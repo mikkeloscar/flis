@@ -1,22 +1,24 @@
 package i3
 
 import (
+	"context"
 	"testing"
 
 	"github.com/mikkeloscar/flis/config"
-	"github.com/mikkeloscar/flis/context"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 
 // TestNewView tests adding a new view to the layout.
 func TestNewView(t *testing.T) {
-	ctx := context.Context(map[string]interface{}{
-		"config": &config.Config{
+	ctx := context.WithValue(
+		context.Background(),
+		"config",
+		&config.Config{
 			Workspaces: map[uint]string{
 				1: "one",
 			},
 		},
-	})
+	)
 
 	output := wlc.Output(0)
 	layout := New()

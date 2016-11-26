@@ -1,8 +1,9 @@
 package layout
 
 import (
+	"context"
+
 	"github.com/mikkeloscar/flis/backend"
-	"github.com/mikkeloscar/flis/context"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 
@@ -52,7 +53,7 @@ type Layout interface {
 
 // Get layout from context.
 func Get(ctx context.Context) Layout {
-	return ctx.MustGet("layout").(Layout)
+	return ctx.Value("layout").(Layout)
 }
 
 // ContainerType is a type of container e.g. Root or Output.

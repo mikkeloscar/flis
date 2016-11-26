@@ -1,16 +1,13 @@
 package layout
 
 import (
+	"context"
 	"testing"
-
-	"github.com/mikkeloscar/flis/context"
 )
 
 // TestGetLayout tests getting layout from context.
 func TestGetLayout(t *testing.T) {
-	ctx := context.Context(map[string]interface{}{
-		"layout": Mock{},
-	})
+	ctx := context.WithValue(context.Background(), "layout", Mock{})
 
 	layout := Get(ctx)
 	if layout == nil {

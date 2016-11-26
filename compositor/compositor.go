@@ -1,10 +1,11 @@
 package compositor
 
 import (
+	"context"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/mikkeloscar/flis/backend"
 	"github.com/mikkeloscar/flis/config"
-	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/flis/input"
 	"github.com/mikkeloscar/flis/layout"
 	wlc "github.com/mikkeloscar/go-wlc"
@@ -26,15 +27,15 @@ type Compositor struct {
 
 // New initializes a new Compositor.
 func New(conf *config.Config, backend backend.Backend, layout layout.Layout) *Compositor {
+	ctx := context.WithValue(context.Background(), "config", conf)
+	ctx = context.WithValue(ctx, "backend", backend)
+	ctx = context.WithValue(ctx, "layout", layout)
+
 	return &Compositor{
 		layout:   layout,
 		keyState: input.NewKeyState(),
-		ctx: context.Context(map[string]interface{}{
-			"config":  conf,
-			"backend": backend,
-			"layout":  layout,
-		}),
-		backend: backend,
+		ctx:      ctx,
+		backend:  backend,
 	}
 }
 

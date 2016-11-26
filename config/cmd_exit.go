@@ -1,9 +1,10 @@
 package config
 
 import (
+	"context"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/mikkeloscar/flis/backend"
-	"github.com/mikkeloscar/flis/context"
 )
 
 // Exit implements the exit command.

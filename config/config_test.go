@@ -1,12 +1,12 @@
 package config
 
 import (
+	"context"
 	"io/ioutil"
 	"os"
 	"path"
 	"testing"
 
-	"github.com/mikkeloscar/flis/context"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
 )
 
@@ -89,9 +89,7 @@ func TestLoadConfig(t *testing.T) {
 
 // TestGetConfig tests getting config from context.
 func TestGetConfig(t *testing.T) {
-	ctx := context.Context(map[string]interface{}{
-		"config": New(),
-	})
+	ctx := context.WithValue(context.Background(), "config", New())
 
 	conf := Get(ctx)
 	if conf == nil {

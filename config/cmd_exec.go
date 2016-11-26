@@ -1,12 +1,12 @@
 package config
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/mikkeloscar/flis/backend"
-	"github.com/mikkeloscar/flis/context"
 )
 
 // Exec implements the exec command.

@@ -1,8 +1,9 @@
 package i3
 
 import (
+	"context"
+
 	"github.com/mikkeloscar/flis/backend"
-	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/flis/layout"
 )
 

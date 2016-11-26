@@ -1,10 +1,9 @@
 package config
 
 import (
+	"context"
 	"fmt"
 	"testing"
-
-	"github.com/mikkeloscar/flis/context"
 )
 
 type mockCommand string

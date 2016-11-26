@@ -1,15 +1,11 @@
 package backend
 
 import (
+	"context"
 	"testing"
-
-	"github.com/mikkeloscar/flis/context"
 )
 
 func TestMustGetBackend(t *testing.T) {
-	ctx := context.Context(map[string]interface{}{
-		"backend": Mock{},
-	})
-
+	ctx := context.WithValue(context.Background(), "backend", Mock{})
 	Get(ctx)
 }

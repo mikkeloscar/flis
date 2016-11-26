@@ -1,16 +1,14 @@
 package config
 
 import (
+	"context"
 	"testing"
 
 	"github.com/mikkeloscar/flis/backend"
-	"github.com/mikkeloscar/flis/context"
 )
 
 func TestExecRun(t *testing.T) {
-	ctx := context.Context(map[string]interface{}{
-		"backend": backend.Mock{},
-	})
+	ctx := context.WithValue(context.Background(), "backend", backend.Mock{})
 	exec := Exec("")
 
 	err := exec.Exec(ctx)

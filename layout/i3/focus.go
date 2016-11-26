@@ -1,8 +1,9 @@
 package i3
 
 import (
+	"context"
+
 	log "github.com/Sirupsen/logrus"
-	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/flis/layout"
 )
 

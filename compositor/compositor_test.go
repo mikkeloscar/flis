@@ -1,12 +1,12 @@
 package compositor
 
 import (
+	"context"
 	"fmt"
 	"testing"
 
 	"github.com/mikkeloscar/flis/backend"
 	"github.com/mikkeloscar/flis/config"
-	"github.com/mikkeloscar/flis/context"
 	"github.com/mikkeloscar/flis/layout"
 	wlc "github.com/mikkeloscar/go-wlc"
 	xkb "github.com/mikkeloscar/go-xkbcommon"

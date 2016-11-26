@@ -1,16 +1,14 @@
 package config
 
 import (
+	"context"
 	"testing"
 
 	"github.com/mikkeloscar/flis/backend"
-	"github.com/mikkeloscar/flis/context"
 )
 
 func TestExitRun(t *testing.T) {
-	ctx := context.Context(map[string]interface{}{
-		"backend": backend.Mock{},
-	})
+	ctx := context.WithValue(context.Background(), "backend", backend.Mock{})
 	exit := Exit{}
 
 	err := exit.Exec(ctx)

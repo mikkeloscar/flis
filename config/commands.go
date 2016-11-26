@@ -1,9 +1,8 @@
 package config
 
 import (
+	"context"
 	"fmt"
-
-	"github.com/mikkeloscar/flis/context"
 )
 
 // Executer is an interface describing how to execute commands.
