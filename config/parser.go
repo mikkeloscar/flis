@@ -5,9 +5,9 @@ import (
 	"strings"
 	"unicode"
 
+	log "github.com/Sirupsen/logrus"
 	wlc "github.com/mikkeloscar/go-wlc"
 	xkb "github.com/mikkeloscar/go-xkbcommon"
-	"github.com/prometheus/common/log"
 
 	"gopkg.in/yaml.v2"
 )

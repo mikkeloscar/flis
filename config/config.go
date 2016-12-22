@@ -10,8 +10,8 @@ import (
 	"sort"
 	"strings"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/mikkeloscar/go-wlc"
-	"github.com/prometheus/common/log"
 )
 
 // Config defines the configuration of a compositor.
