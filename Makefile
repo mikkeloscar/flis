@@ -47,10 +47,8 @@ init: ## Install requirements
 	@echo -e "$(OK_COLOR)[$(BINARY)] Install requirements$(NO_COLOR)"
 	@go get -u github.com/golang/glog
 	@go get -u github.com/kardianos/govendor
-	@go get -u github.com/Masterminds/rmvcsdir
 	@go get -u github.com/golang/lint/golint
 	@go get -u github.com/kisielk/errcheck
-	@go get -u golang.org/x/tools/cmd/oracle
 
 deps:
 	go get -v -u -t ./...
