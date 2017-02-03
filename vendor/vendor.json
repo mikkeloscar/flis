@@ -1,0 +1,19 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "5hMEpbntL6yP4cfN4d4rir4n1Qc=",
+			"path": "github.com/mikkeloscar/go-wlc",
+			"revision": "b5f9b305b23ecb4d2fa44faa3ba684d3a1fa332e",
+			"revisionTime": "2017-01-22T10:48:40Z"
+		},
+		{
+			"checksumSHA1": "wsY6F14du8FHHKnwcs0YEOI7mNo=",
+			"path": "github.com/mikkeloscar/go-xkbcommon",
+			"revision": "8f45804fb35817c5f251258d9320b17298f8c7ca",
+			"revisionTime": "2016-03-03T13:59:56Z"
+		}
+	],
+	"rootPath": "github.com/mikkeloscar/flis"
+}
