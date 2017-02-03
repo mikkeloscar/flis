@@ -3,6 +3,30 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "9OSfmTckSjD1No3iVWMjL4qI+AQ=",
+			"path": "github.com/alecthomas/kingpin",
+			"revision": "7b7c3e10c746bb718299261d2093286e5e38e04c",
+			"revisionTime": "2017-01-03T22:55:01Z"
+		},
+		{
+			"checksumSHA1": "KmjnydoAbofMieIWm+it5OWERaM=",
+			"path": "github.com/alecthomas/template",
+			"revision": "a0175ee3bccc567396460bf5acd36800cb10c49c",
+			"revisionTime": "2016-04-05T07:15:01Z"
+		},
+		{
+			"checksumSHA1": "3wt0pTXXeS+S93unwhGoLIyGX/Q=",
+			"path": "github.com/alecthomas/template/parse",
+			"revision": "a0175ee3bccc567396460bf5acd36800cb10c49c",
+			"revisionTime": "2016-04-05T07:15:01Z"
+		},
+		{
+			"checksumSHA1": "fCc3grA7vIxfBru7R3SqjcW+oLI=",
+			"path": "github.com/alecthomas/units",
+			"revision": "2efee857e7cfd4f3d0138cc3cbb1b4966962b93a",
+			"revisionTime": "2015-10-22T06:55:26Z"
+		},
+		{
 			"checksumSHA1": "5hMEpbntL6yP4cfN4d4rir4n1Qc=",
 			"path": "github.com/mikkeloscar/go-wlc",
 			"revision": "b5f9b305b23ecb4d2fa44faa3ba684d3a1fa332e",
