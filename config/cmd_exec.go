@@ -14,7 +14,7 @@ type Exec string
 
 // Exec executes the exec command.
 func (e Exec) Exec(ctx context.Context) error {
-	log.Debugf("Running command '%s'", e)
+	log.Debugf("Executing shell command '%s'", e)
 	backend.Get(ctx).Exec("/bin/sh", "-c", string(e))
 	return nil
 }
