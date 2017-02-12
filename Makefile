@@ -10,7 +10,8 @@ LDFLAGS       ?= -X main.version=$(VERSION) -w -s
 default: build
 
 deps:
-	go get -v -u -t ./...
+	go get -u github.com/golang/dep/...
+	dep ensure
 
 clean:
 	rm -rf build

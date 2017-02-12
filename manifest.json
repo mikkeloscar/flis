@@ -1,0 +1,19 @@
+{
+    "dependencies": {
+        "github.com/Sirupsen/logrus": {
+            "branch": "master"
+        },
+        "github.com/alecthomas/kingpin": {
+            "branch": "master"
+        },
+        "github.com/mikkeloscar/go-wlc": {
+            "branch": "master"
+        },
+        "github.com/mikkeloscar/go-xkbcommon": {
+            "branch": "master"
+        },
+        "gopkg.in/yaml.v2": {
+            "branch": "v2"
+        }
+    }
+}

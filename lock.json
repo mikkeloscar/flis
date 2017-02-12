@@ -1,0 +1,68 @@
+{
+    "memo": "735f3ad10c4d1a6675c053f59056a562fc74720309e816da21376d7f650f4c2c",
+    "projects": [
+        {
+            "name": "github.com/Sirupsen/logrus",
+            "branch": "master",
+            "revision": "3f603f494d61c73457fb234161d8982b9f0f0b71",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/alecthomas/kingpin",
+            "branch": "master",
+            "revision": "4632cad00ac4bf4c455622ebfae46580c3890b8f",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/alecthomas/template",
+            "branch": "master",
+            "revision": "a0175ee3bccc567396460bf5acd36800cb10c49c",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/alecthomas/units",
+            "branch": "master",
+            "revision": "2efee857e7cfd4f3d0138cc3cbb1b4966962b93a",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mikkeloscar/go-wlc",
+            "branch": "master",
+            "revision": "04c09279fa8c46a913929add14633f7f6489f7a2",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mikkeloscar/go-xkbcommon",
+            "branch": "master",
+            "revision": "8f45804fb35817c5f251258d9320b17298f8c7ca",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "golang.org/x/sys",
+            "revision": "8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9",
+            "packages": [
+                "unix"
+            ]
+        },
+        {
+            "name": "gopkg.in/yaml.v2",
+            "branch": "v2",
+            "revision": "a3f3340b5840cee44f372bddb5880fcbc419b46a",
+            "packages": [
+                "."
+            ]
+        }
+    ]
+}
