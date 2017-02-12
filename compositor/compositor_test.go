@@ -20,6 +20,18 @@ func TestOutputCreated(t *testing.T) {
 	}
 }
 
+// Test OutputResolution cb.
+func TestOutputResolution(t *testing.T) {
+	c := New(nil, nil, layout.Mock{})
+	c.OutputResolution(0, nil, nil)
+}
+
+// Test ViewRequestGeometry cb.
+func TestViewRequestGeometry(t *testing.T) {
+	c := New(nil, nil, nil)
+	c.ViewRequestGeometry(0, nil)
+}
+
 // Test ViewCreated cb.
 func TestViewCreated(t *testing.T) {
 	c := New(nil, nil, layout.Mock{})

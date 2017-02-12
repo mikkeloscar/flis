@@ -48,9 +48,22 @@ func (c *Compositor) OutputCreated(o wlc.Output) bool {
 	return true
 }
 
+// OutputResolution is the callback triggered when output resolution changes.
+func (c *Compositor) OutputResolution(o wlc.Output, from *wlc.Size, to *wlc.Size) {
+	c.layout.Arrange(c.layout.OutputByBackend(o))
+}
+
+// ViewRequestGeometry is the callback triggered when a new view geometry is
+// requested. Note this callback must allways be be set (even if it's stubbed)
+// otherwise wlc won't accept your geometry requests.
+func (c *Compositor) ViewRequestGeometry(view wlc.View, geometry *wlc.Geometry) {
+	// stub intentionally to ignore geometry requests.
+}
+
 // ViewCreated is the callback triggered when a view is added by the backend.
 func (c *Compositor) ViewCreated(v wlc.View) bool {
-	c.layout.NewView(c.ctx, v)
+	view := c.layout.NewView(c.ctx, v)
+	c.layout.Arrange(view.Parent())
 
 	// TODO: return false on failure
 	return true

@@ -19,6 +19,16 @@ func (l *Layout) NewOutput(ctx context.Context, output backend.Output) {
 	l.NewWorkspace(ctx, o, name, num)
 }
 
+// OutputByBackend gets output container from backend output interface.
+func (l *Layout) OutputByBackend(output backend.Output) layout.Container {
+	for _, child := range l.root.Children() {
+		if o, ok := child.(*layout.Output); ok && o.Output == output {
+			return child
+		}
+	}
+	return nil
+}
+
 // findNextWorkspace finds next available workspace name & number.
 func findNextWorkspace(ws []*layout.Workspace, confWs map[uint]string) (string, uint) {
 	num := findAvailableWorkspaceNum(ws)

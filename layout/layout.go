@@ -41,7 +41,7 @@ type Layout interface {
 	NewWorkspace(ctx context.Context, output *Output, name string, num uint)
 
 	// NewView initializes a new view.
-	NewView(ctx context.Context, view backend.View)
+	NewView(ctx context.Context, view backend.View) Container
 
 	// ArrangeRoot arranges the whole layout from the root and down.
 	ArrangeRoot()
@@ -49,6 +49,10 @@ type Layout interface {
 	// Arrange arranges a subbranch of the layout starting from the
 	// specified container and moving down the layout.
 	Arrange(start Container)
+
+	// OutputByBackend gets output container from backend output interface.
+	OutputByBackend(output backend.Output) Container
+	// ViewByBackend(output backend.Output) Container
 }
 
 // Get layout from context.
