@@ -13,6 +13,8 @@ arch:
     # - gdk-pixbuf2
     - wlc-git
   script:
+    # Fix for https://github.com/niemeyer/gopkg/issues/50
+    - git config --global http.https://gopkg.in.followRedirects true
     - go get github.com/mattn/goveralls
     - make deps
     # - make check
