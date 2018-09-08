@@ -3,7 +3,7 @@ package layout
 import (
 	"reflect"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 

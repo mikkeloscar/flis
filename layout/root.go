@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"sort"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	wlc "github.com/mikkeloscar/go-wlc"
 )
 

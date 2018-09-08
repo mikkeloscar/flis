@@ -1,7 +1,7 @@
 package i3
 
 import (
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/mikkeloscar/flis/layout"
 )
 

@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/alecthomas/kingpin"
 	"github.com/mikkeloscar/flis/backend"
 	"github.com/mikkeloscar/flis/compositor"

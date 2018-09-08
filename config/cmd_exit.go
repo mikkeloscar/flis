@@ -3,7 +3,7 @@ package config
 import (
 	"context"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/mikkeloscar/flis/backend"
 )
 
