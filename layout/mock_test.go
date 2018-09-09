@@ -15,4 +15,16 @@ func TestMock(t *testing.T) {
 	m.NewView(nil, nil)
 	m.ArrangeRoot()
 	m.Arrange(nil)
+	m.OutputByBackend(nil)
+
+	v := MockView{}
+
+	v.Geometry()
+	v.Children()
+	v.Floating()
+	v.Focused()
+	v.Parent()
+	v.Visible()
+	v.AddChild(nil)
+	v.Type()
 }

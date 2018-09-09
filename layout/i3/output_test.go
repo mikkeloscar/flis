@@ -2,8 +2,10 @@ package i3
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
+	"github.com/mikkeloscar/flis/backend"
 	"github.com/mikkeloscar/flis/config"
 	"github.com/mikkeloscar/flis/layout"
 	wlc "github.com/mikkeloscar/go-wlc"
@@ -21,14 +23,76 @@ func TestNewOutput(t *testing.T) {
 		},
 	)
 
-	output := wlc.Output(0)
+	output := mockOutput(0)
 	layout := New()
 	layout.NewOutput(ctx, output)
 }
 
+type mockOutput int
+
+func (o mockOutput) Focus()                                          {}
+func (o mockOutput) GetMask() uint32                                 { return 0 }
+func (o mockOutput) GetMutableViews() []wlc.View                     { return nil }
+func (o mockOutput) Name() string                                    { return fmt.Sprintf("%d", o) }
+func (o mockOutput) GetRenderer() wlc.Renderer                       { return wlc.NoRenderer }
+func (o mockOutput) GetResolution() *wlc.Size                        { return nil }
+func (o mockOutput) GetVirtualResolution() *wlc.Size                 { return nil }
+func (o mockOutput) SetResolution(resolution wlc.Size, scale uint32) {}
+func (o mockOutput) GetScale() uint32                                { return 0 }
+func (o mockOutput) GetSleep() bool                                  { return false }
+func (o mockOutput) GetViews() []wlc.View                            { return nil }
+func (o mockOutput) ScheduleRender()                                 {}
+func (o mockOutput) SetMask(mask uint32)                             {}
+func (o mockOutput) SetSleep(sleep bool)                             {}
+func (o mockOutput) SetViews(views []wlc.View) bool                  { return false }
+
+// TestOutputByBackend tests getting an output container from a backend output
+// interface.
+func TestOutputByBackend(t *testing.T) {
+	ctx := context.WithValue(
+		context.Background(),
+		"config",
+		&config.Config{
+			Workspaces: map[uint]string{
+				1: "one",
+			},
+		},
+	)
+
+	layout := New()
+
+	for i := 0; i < 5; i++ {
+		output := mockOutput(i)
+		layout.NewOutput(ctx, output)
+	}
+
+	for _, ti := range []struct {
+		output backend.Output
+		exists bool
+	}{
+		{
+			output: mockOutput(2),
+			exists: true,
+		},
+		{
+			output: mockOutput(10),
+			exists: false,
+		},
+	} {
+		c := layout.OutputByBackend(ti.output)
+		if c == nil && ti.exists {
+			t.Errorf("expected to find an output")
+		}
+
+		if c != nil && !ti.exists {
+			t.Errorf("did not expect to find an output")
+		}
+	}
+}
+
 // TestFindNextWorkspace tests finding the next available workspace.
 func TestFindNextWorkspace(t *testing.T) {
-	tests := []struct {
+	for _, ti := range []struct {
 		current []*layout.Workspace
 		names   map[uint]string
 		name    string
@@ -64,23 +128,21 @@ func TestFindNextWorkspace(t *testing.T) {
 			"2",
 			2,
 		},
-	}
-
-	for _, test := range tests {
-		name, num := findNextWorkspace(test.current, test.names)
-		if name != test.name {
-			t.Errorf("expected to get workspace name '%s', got '%s'", test.name, name)
+	} {
+		name, num := findNextWorkspace(ti.current, ti.names)
+		if name != ti.name {
+			t.Errorf("expected to get workspace name '%s', got '%s'", ti.name, name)
 		}
 
-		if num != test.num {
-			t.Errorf("expected to get workspace num '%d', got '%d'", test.num, num)
+		if num != ti.num {
+			t.Errorf("expected to get workspace num '%d', got '%d'", ti.num, num)
 		}
 	}
 }
 
 // TestFindAvailableWorkspaceNum tests finding available workspace number.
 func TestFindAvailableWorkspaceNum(t *testing.T) {
-	tests := []struct {
+	for _, ti := range []struct {
 		ws  []*layout.Workspace
 		num uint
 	}{
@@ -108,12 +170,10 @@ func TestFindAvailableWorkspaceNum(t *testing.T) {
 			},
 			2,
 		},
-	}
-
-	for _, test := range tests {
-		num := findAvailableWorkspaceNum(test.ws)
-		if num != test.num {
-			t.Errorf("expected workspace num %d, got %d", test.num, num)
+	} {
+		num := findAvailableWorkspaceNum(ti.ws)
+		if num != ti.num {
+			t.Errorf("expected workspace num %d, got %d", ti.num, num)
 		}
 	}
 }

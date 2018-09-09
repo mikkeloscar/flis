@@ -57,9 +57,12 @@ func main() {
 	comp := compositor.New(conf, &backend.WLC{}, i3.New())
 
 	wlc.SetOutputCreatedCb(comp.OutputCreated)
+	wlc.SetOutputResolutionCb(comp.OutputResolution)
 	wlc.SetViewCreatedCb(comp.ViewCreated)
+	wlc.SetViewRequestGeometryCb(comp.ViewRequestGeometry)
 	wlc.SetPointerMotionCb(comp.PointerMotion)
 	wlc.SetKeyboardKeyCb(comp.KeyboardKey)
+	wlc.LogSetHandler(wlcLogHandler)
 
 	if !wlc.Init() {
 		os.Exit(1)
@@ -67,4 +70,18 @@ func main() {
 
 	wlc.Run()
 	os.Exit(0)
+}
+
+func wlcLogHandler(typ wlc.LogType, msg string) {
+	format := "[WLC] %s"
+	switch typ {
+	case wlc.LogInfo:
+		log.Debugf(format, msg)
+	case wlc.LogWarn:
+		log.Warnf(format, msg)
+	case wlc.LogError:
+		log.Errorf(format, msg)
+	case wlc.LogWayland:
+		log.Debugf("[WLC - Wayland] %s", msg)
+	}
 }
